@@ -13,4 +13,10 @@ const returnRandBase = () => {
     return newStrand
   }
 
-  
+const pAequorFactory = (organismNumber, DNABase) => {
+    const specimen = {
+        'specimenNum' : organismNumber,
+        'dna': DNABase
+    };
+    return specimen;
+}
