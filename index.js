@@ -48,9 +48,33 @@ const pAequorFactory = (organismNumber, DNABase) => {
             const gBasePercentage = (gBaseCountr/15) * 100;
             const likelyToSurvive = cBasePercentage >=60 || gBasePercentage >=60
             return likelyToSurvive;
+        },
+        complementStrand() {
+            let newStrand = [];
+            this.dna.forEach(base => {
+                switch(base) {
+                    case 'A':
+                        newStrand.push('T');
+                        break;
+                    case 'T':
+                        newStrand.push('A');
+                        break;
+                    case 'C':
+                        newStrand.push('G');
+                        break;
+                    case 'G':
+                        newStrand.push('C');
+                        break;
+                    default:
+                        newStrand.push(returnRandBase());
+                        break;
+                }
+            })
+            return pAequorFactory(Math.floor(Math.random()*100), newStrand)
         }
         
     };
+
     return specimen;
 }
 
@@ -64,6 +88,7 @@ for(let i = 0 ; i<30; ++i) {
     }
     else --i;
 }
+
 
 
 
