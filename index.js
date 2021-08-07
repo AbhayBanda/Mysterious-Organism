@@ -20,3 +20,19 @@ const pAequorFactory = (organismNumber, DNABase) => {
     };
     return specimen;
 }
+
+let pAequor = pAequorFactory(1,mockUpStrand())
+
+pAequor.mutate = function() {
+    const newBaseIndex = Math.floor(Math.random() * this.dna.length);
+    const selectedBase = this.dna[newBaseIndex];
+    let newBase = selectedBase;
+    while(newBase === selectedBase) {
+        newBase = returnRandBase();
+    }
+    this.dna[newBaseIndex] = newBase;
+
+    return this.dna;
+}
+
+
