@@ -36,16 +36,36 @@ const pAequorFactory = (organismNumber, DNABase) => {
                 commonDNACounter += pAequorBase === currentpAequorBase ? 1 : 0;
             }
             return ((commonDNACounter/15)*100).toFixed(2);
+        },
+        willLikelySurvive() {
+            let cBaseCounter = 0;
+            let gBaseCountr = 0;
+            this.dna.forEach((base) => {
+                if(base === 'C') cBaseCounter++;
+                else if(base === 'G') gBaseCountr++;
+            });
+            const cBasePercentage = (cBaseCounter/15) * 100;
+            const gBasePercentage = (gBaseCountr/15) * 100;
+            const likelyToSurvive = cBasePercentage >=60 || gBasePercentage >=60
+            return likelyToSurvive;
         }
         
     };
     return specimen;
 }
 
-let pAequor1 = pAequorFactory(1,mockUpStrand())
-let pAequor2 = pAequorFactory(2, mockUpStrand());
-console.log(pAequor1.dna);
-console.log(pAequor2.dna);
-console.log(pAequor1.compareDNA(pAequor2) + "% similarity");
+
+let pAequorInstances = [];
+const speciesNum = 1;
+for(let i = 0 ; i<30; ++i) {
+    const pAequor = pAequorFactory(speciesNum,mockUpStrand());
+    if(pAequor.willLikelySurvive()) {
+        pAequorInstances.push(pAequor);
+    }
+    else --i;
+}
+
+
+
 
 
